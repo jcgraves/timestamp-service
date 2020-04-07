@@ -1,22 +1,44 @@
+# FCC Timestamp Service
 
-# API Project: Timestamp Microservice for FCC
+Timestamp Service is a simple API that given a date will return a unix and utc timestamp
+Challenge from Free Code Camp
 
-### User stories :
+## Usage
 
-1. The API endpoint is `GET https://jcgraves-timestamp-service.glitch.me/api/timestamp/:date_string?`
-2. A date string is valid if can be successfully parsed by `new Date(date_string)` (JS) . Note that the unix timestamp needs to be an **integer** (not a string) specifying **milliseconds**. In our test we will use date strings compliant with ISO-8601 (e.g. `"2016-11-20"`) because this will ensure an UTC timestamp.
-3. If the date string is **empty** it should be equivalent to trigger `new Date()`, i.e. the service uses the current timestamp.
-4. If the date string is **valid** the api returns a JSON having the structure 
-`{"unix": <date.getTime()>, "utc" : <date.toUTCString()> }`
-e.g. `{"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}`.
-5. If the date string is **invalid** the api returns a JSON having the structure `{"unix": null, "utc" : "Invalid Date" }`. It is what you get from the date manipulation functions used above.
+GET https://jcgraves-timestamp-service.glitch.me/api/timestamp/
 
-#### Example usage:
-* https://curse-arrow.hyperdev.space/api/timestamp/2015-12-15
-* https://curse-arrow.hyperdev.space/api/timestamp/1450137600000
+I can pass a natural language argument for a date (e.g. 2019-10-15 or October 10, 2019)
+<https://jcgraves-timestamp-service.glitch.me/api/timestamp/2019-10-15>
 
-#### Example output:
-* { "unix": 1450137600, "natural": "December 15, 2015" }
-#� �t�i�m�e�s�t�a�m�p�-�s�e�r�v�i�c�e�
-�
-�
+```json
+{
+  "unix": 1571097600000,
+  "utc": "Tue, 15 Oct 2019 00:00:00 GMT"
+}
+```
+
+OR
+I can pass a unix timestamp argument for a date (e.g. 1571097600000)
+<https://jcgraves-timestamp-service.glitch.me/api/timestamp/1571097600000>
+
+```json
+{
+  "unix": 1571097600000,
+  "utc": "Tue, 15 Oct 2019 00:00:00 GMT"
+}
+```
+
+OR
+If I pass nothing in I will get a current timestamp
+
+```json
+{
+  "unix": 1586296288727,
+  "utc": "Tue Apr 07 2020 21:51:28 GMT+0000 (Coordinated Universal Time)"
+}
+```
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
