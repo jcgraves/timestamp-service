@@ -24,16 +24,15 @@ app.get('/api/timestamp/', (req, res) => {
 
 app.get('/api/timestamp/:date_string', (req, res) => {
   let date_string = req.params.date_string;
-
+  // Assume 5+ digits is valid unix timestamp
   const regex = /\d{5,}/;
-
   if (regex.test(date_string)) {
+    // Multilpy by 1000 to get proper format for date (milliseconds)
     let dateObj = new Date(date_string * 1000)
     res.send({ "unix": date_string, "utc": dateObj.toUTCString() })
   }
-
+  // Try to pass string directly into Date
   let dateObj = new Date(date_string)
-
   if (!isNaN(dateObj)) {
     res.send({ "unix": dateObj.valueOf(), "utc": dateObj.toUTCString() })
   } else {
